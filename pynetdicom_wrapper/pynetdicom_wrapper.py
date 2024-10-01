@@ -101,7 +101,7 @@ class PynetdicomWrapper:
         find_plan_ds.SOPInstanceUID = ''
         find_plan_ds.StudyInstanceUID = ''
 
-        # Associate with the peer AE at IP 10.128.140.11 and port 51402
+        # Associate with the peer AE at IP 192.168.1.x and port 51402
         assoc = ae.associate(self.remote_ip, self.remote_port, ae_title=self.remote_aet)
         
         identifier_list = []
