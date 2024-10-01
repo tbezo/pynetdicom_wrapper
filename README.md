@@ -1,5 +1,5 @@
 # pynetdicom_wrapper
-A wrapper for pynetdicom to fetch DICOM images from Aria and store them in a directory for usage in QATrack+.
+A wrapper for [pynetdicom](https://pydicom.github.io/pynetdicom/stable/) to fetch DICOM images from Aria and store them in a directory for usage in QATrack+.
 
 ## Setup Instructions
 There are three steps to take to be able to use the pynetdicom_wrapper script/module: Configure the Aria DB Daemon, install pynetdicom and pynetdicom_wrapper inside your Qatrack+ virtual environment and finally set up the QATrack+ test lists.
