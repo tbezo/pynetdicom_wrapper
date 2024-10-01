@@ -215,7 +215,7 @@ class PynetdicomWrapper:
         # variable for latest date+time to return
         latest_datetime = ''
 
-        # Associate with the peer AE at IP 10.128.140.11 and port 51402
+        # Associate with the peer AE at IP 192.168.1.x and port 51402
         assoc = ae.associate(self.remote_ip, self.remote_port, ae_title=self.remote_aet)
 
         if assoc.is_established:
