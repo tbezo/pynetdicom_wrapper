@@ -12,14 +12,14 @@ In order to fetch DICOM images from Aria you first have to configure the DICOM S
 ### Pynetdicom
 To use the pynetdicom_wrapper you first have to "pip install pynetdicom" (don't forget to activate your QATrack+ virtual environment). After that you can download the pynetdicom_wrapper folder and its contents and copy it to the site-packages (for example ~/venvs/qatrack31/lib/python3.10/site-packages/). Since the wrapper should allow for as few lines of code as possible in QATrack+ the connection to the Aria DB is hardcoded inside pynetdicom_wrapper.py __init__() method (lines 31 onward).
 ```Python
- 52     # DICOM SCU/SCP config options
- 53     self.local_aet = 'QATRACK'
- 54     self.local_ip = '192.168.1.1'
- 55     self.local_port = 9999
- 56
- 57     self.remote_aet = 'ESAPI'
- 58     self.remote_ip = '192.168.1.2'
- 59     self.remote_port = 51402
+ 30     # DICOM SCU/SCP config options
+ 31     self.local_aet = 'QATRACK'
+ 32     self.local_ip = '192.168.1.1'
+ 33     self.local_port = 9999
+ 34
+ 35     self.remote_aet = 'ESAPI'
+ 36     self.remote_ip = '192.168.1.2'
+ 37     self.remote_port = 51402
 ```
 (If you want to set the variables on the fly you can do that when you ommit passing pat_id and plan_name when creating your PynetdicomWrapper instance and call get_plan_uids by hand.)
 
