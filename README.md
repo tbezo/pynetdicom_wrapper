@@ -50,3 +50,9 @@ wl = WinstonLutz(outputpath)
 wl.analyze(bb_size_mm=5)
 wl.publish_pdf('mywl.pdf')
 ```
+
+## Debug the connection
+If you want to enable the pynetdicom debug logger, uncomment line 12: #debug_logger()
+
+## Limitations
+If there is more than one plan with the same ID in different series the script will not work as expected and A ValueError will be raised.
