@@ -29,7 +29,7 @@ First you have to make sure, your server firewall is accepting connections from 
 ## Usage
 When using the pynetdicom_wrapper you first create an instance of PynetdicomWrapper with the patient ID and the plan name as parameters. After that you call the .get_latest_series() method with at least giving a Path to a (temporary) directory were the images can be stored in and the image type. The temporary directory can be created with the "tempfile" module from the python standard library (see example). The imagetype is in DICOM Tag (0008,0008) it should be either "ORIGINAL\PRIMARY\PORTAL" for normal portal images or "ORIGINAL\PRIMARY\PORTAL\ACQUIRED_DOSE" for portal dose images.
 
-get_latest_series() writes the files to the given directory (if anything is found) and returns the date+time string taken from the DICOM objects in case you want to write that to a test also.
+get_series() writes the files to the given directory (if anything is found) and returns the date+time string taken from the DICOM objects in case you want to write that to a test also.
 If you also want to download the kV images from the series you can set ignore_kV to False.
 
 ## Example
@@ -52,7 +52,7 @@ wl.publish_pdf('mywl.pdf')
 ```
 
 ## Debug the connection
-If you want to enable the pynetdicom debug logger, uncomment line 12: #debug_logger()
+If you want to enable the pynetdicom debug logger, uncomment line 13: # debug_logger()
 
 ## Limitations
 If there is more than one plan with the same ID in different series the script will not work as expected and A ValueError will be raised.
