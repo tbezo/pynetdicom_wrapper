@@ -61,6 +61,12 @@ class AEConfig:
         self.ip = ip
         self.port = port
 
+    def __rep__(self) -> str:
+        return f"AEConfig, AET: {self.aet}, IP: {self.ip}, Port: {self.port}"
+
+    def __str__(self) -> str:
+        return f"{self.aet} - {self.ip}:{self.port}"
+
     @property
     def ip(self):
         """IP of the AE"""
