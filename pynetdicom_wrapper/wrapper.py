@@ -113,7 +113,7 @@ class PynetdicomWrapper:
             raise ValueError(f"More than one plan found with name {plan_name}")
 
 
-    def get_series(self, path: Path, imagetype: str, seriesdate: date = None,
+    def get_series(self, path: Path, imagetype: str, seriesdate: date | None = None,
                            ignore_kV: bool = True) -> str:
         r"""Function to wrap the pynetdicom commands to make it easier to
         use the method in qatrack+. Querys the fixed DICOM SCP for the latest
@@ -127,7 +127,7 @@ class PynetdicomWrapper:
                 Portal ('ORIGINAL\PRIMARY\PORTAL') or
                 Portal Dose ('ORIGINAL\PRIMARY\PORTAL\ACQUIRED_DOSE')
             seriesdate: date
-                date object with date the series was acquired on.
+                Optional date object with date the series was acquired on.
             ignore_kV: bool
                 Do not move kV images, only MV.
 
