@@ -101,7 +101,10 @@ class PynetdicomWrapper:
             identifier_list = [identifier for status, identifier in find_responses
                                if status and identifier is not None]
 
-        assoc.release()
+            assoc.release()
+        else:  # no association could be established
+            raise ConnectionError(f'Association with {self.remote_conf} rejected, '
+                                  f'aborted or never connected.')
 
         # Only one result allowed, so we are doing some checks:
         if len(identifier_list) == 1:
@@ -225,7 +228,8 @@ class PynetdicomWrapper:
 
         else:  # no association could be established
             scp.shutdown()
-            raise ConnectionError('Association rejected, aborted or never connected.')
+            raise ConnectionError(f'Association with {self.remote_conf} rejected, '
+                                  f'aborted or never connected.')
 
         # Transfers done, stopping the scp.
         scp.shutdown()
