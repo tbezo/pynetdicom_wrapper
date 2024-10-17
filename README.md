@@ -1,6 +1,6 @@
 # pynetdicom_wrapper
 A wrapper for [pynetdicom](https://pydicom.github.io/pynetdicom/stable/) to 
-fetch DICOM images from Aria and store them in a directory for usage in QATrack+.
+fetch DICOM RT-Images from Aria and store them in a directory for usage in QATrack+.
 
 ## Changelog:
 v0.0.2: Added Option to get images by date. Created helper methods for creation of datasets.  
