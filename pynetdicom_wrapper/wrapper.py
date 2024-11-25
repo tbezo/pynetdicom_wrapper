@@ -32,6 +32,7 @@ class PynetdicomWrapper:
         # DICOM SCU/SCP config options
         self.local_conf = dset.AEConfig(aet='QATRACK', ip='192.186.1.1', port=9999)
         self.remote_conf = dset.AEConfig(aet='ESAPI', ip='192.168.1.2', port=51402)
+
         self.pat_id = pat_id
         self.plan_name = plan_name
 
@@ -42,7 +43,7 @@ class PynetdicomWrapper:
             self.get_plan_uids(self.pat_id, self.plan_name)
 
     @staticmethod
-    def handle_store(event, path: Path) -> int:
+    def handle_store(event, path: Path, ignore_kV: bool = True) -> int:
         """Handle a C-STORE request event (write to path).
         Handler for pynetdicom evt.EVT_C_STORE. Always returns success!
 
@@ -58,9 +59,12 @@ class PynetdicomWrapper:
 
         outfile = path / (ds.SOPInstanceUID + '.dcm')
 
-        # Save the dataset using the SOP Instance UID as the filename
-        ds.save_as(outfile, write_like_original=False)
+        # ignore kV images which have PrimaryDosimeterUnit "MINUTE"
+        if ignore_kV and ds.PrimaryDosimeterUnit == 'MINUTE':
+            return 0x0000
 
+        # else save the dataset using the SOP Instance UID as the filename
+        ds.save_as(outfile, write_like_original=False)
         # Return a 'Success' status
         return 0x0000
 
@@ -156,8 +160,8 @@ class PynetdicomWrapper:
 
         # Create/copy identifier (move) dataset
         move_ds = find_series_ds
-        if ignore_kV:
-            move_ds.PrimaryDosimeterUnit = 'MU'  # ignore kV images which have "MINUTE" here
+#        if ignore_kV:
+#            move_ds.PrimaryDosimeterUnit = 'MU'  # ignore kV images which have "MINUTE" here
 
         # List for tuples with date+time and SeriesInstanceUIDs
         date_suid_list = []
@@ -171,7 +175,7 @@ class PynetdicomWrapper:
         ae.supported_contexts = StoragePresentationContexts
 
         # Start our Storage SCP in non-blocking mode, listening on Port 9999 (open port in FW!)
-        handlers = [(evt.EVT_C_STORE, self.handle_store, [path])]
+        handlers = [(evt.EVT_C_STORE, self.handle_store, [path, ignore_kV])]
         scp = ae.start_server((self.local_conf.ip, self.local_conf.port),
                               block=False, evt_handlers=handlers)
 
