@@ -51,7 +51,7 @@ set patient ID and plan name you can add an additional boolean test
 
 ## Usage
 When using the pynetdicom_wrapper you first create an instance of PynetdicomWrapper 
-with the patient ID and the plan name as parameters. After that you call the 
+with the patient ID and the plan ID as parameters. After that you call the 
 .get_series() method with at least a Path to a (temporary) directory 
 were the images can be stored in and the image type. The temporary directory 
 can be created with the "tempfile" module from the python standard library 
@@ -93,4 +93,5 @@ If you want to enable the pynetdicom debug logger, uncomment line 13: # debug_lo
 
 ## Limitations
 If there is more than one plan with the same ID in different series the script 
-will not work as expected and A ValueError will be raised.
+will not work as expected and A ValueError will be raised.  
+Also not every plan ID that is allowed in Eclipse works, the maximum number of characters seems to be twelve.
